@@ -26,10 +26,10 @@
             </objects>
             <point key="canvasLocation" x="-1218" y="77"/>
         </scene>
-        <!--View Controller-->
+        <!--Map View Controller-->
         <scene sceneID="2df-f9-Q83">
             <objects>
-                <viewController id="DZB-Jg-dyf" sceneMemberID="viewController">
+                <viewController id="DZB-Jg-dyf" customClass="MapViewController" customModule="IOSND_VirtualTourist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SJS-Rb-4yR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

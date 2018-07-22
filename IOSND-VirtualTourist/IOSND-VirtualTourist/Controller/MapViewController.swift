@@ -10,6 +10,8 @@ import UIKit
 import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate {
+    
+    var dataController: DataController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
