@@ -13,6 +13,7 @@
 		43208AD12105072100D183AD /* IOSND_VirtualTourist.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 43208ACF2105072100D183AD /* IOSND_VirtualTourist.xcdatamodeld */; };
 		43208AD32105072100D183AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43208AD22105072100D183AD /* Assets.xcassets */; };
 		43208AD62105072100D183AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43208AD42105072100D183AD /* LaunchScreen.storyboard */; };
+		43208AE12105210D00D183AD /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43208AE02105210D00D183AD /* Data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		43208AD22105072100D183AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		43208AD52105072100D183AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		43208AD72105072100D183AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		43208AE02105210D00D183AD /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +58,40 @@
 		43208AC72105072100D183AD /* IOSND-VirtualTourist */ = {
 			isa = PBXGroup;
 			children = (
+				43208ADF210520DF00D183AD /* View */,
+				43208ADE210520D800D183AD /* Controller */,
+				43208ADD210520CC00D183AD /* Model */,
 				43208AC82105072100D183AD /* AppDelegate.swift */,
-				43208ACA2105072100D183AD /* MapViewController.swift */,
-				43208ACC2105072100D183AD /* Main.storyboard */,
 				43208AD22105072100D183AD /* Assets.xcassets */,
-				43208AD42105072100D183AD /* LaunchScreen.storyboard */,
 				43208AD72105072100D183AD /* Info.plist */,
 				43208ACF2105072100D183AD /* IOSND_VirtualTourist.xcdatamodeld */,
 			);
 			path = "IOSND-VirtualTourist";
+			sourceTree = "<group>";
+		};
+		43208ADD210520CC00D183AD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				43208AE02105210D00D183AD /* Data.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		43208ADE210520D800D183AD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				43208ACA2105072100D183AD /* MapViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		43208ADF210520DF00D183AD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				43208ACC2105072100D183AD /* Main.storyboard */,
+				43208AD42105072100D183AD /* LaunchScreen.storyboard */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,6 +169,7 @@
 				43208ACB2105072100D183AD /* MapViewController.swift in Sources */,
 				43208AD12105072100D183AD /* IOSND_VirtualTourist.xcdatamodeld in Sources */,
 				43208AC92105072100D183AD /* AppDelegate.swift in Sources */,
+				43208AE12105210D00D183AD /* Data.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
