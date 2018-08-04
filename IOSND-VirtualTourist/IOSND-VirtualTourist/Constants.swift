@@ -22,7 +22,7 @@ struct Constants {
     
     struct ParameterValues {
         static let method = "flickr.photos.search"
-        static let apiKey = ""
+        static let apiKey = "a6b7978141e96caab2ce3fa48680ce7d"
         static let extras = "url_m"
         static let format = "json"
         static let perPage = "21"

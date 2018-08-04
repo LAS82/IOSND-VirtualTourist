@@ -15,12 +15,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     var dataController: DataController!
     var mapPress = UILongPressGestureRecognizer()
     let fetch: NSFetchRequest<Pin> = Pin.fetchRequest()
+    let fetchRequest: NSFetchRequest<Pin> = Pin.fetchRequest()
     
     @IBOutlet weak var map: MKMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
         mapPress = UILongPressGestureRecognizer(target: self, action: #selector(setPinOnMap(sender:)))
         
@@ -89,7 +89,32 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        performSegue(withIdentifier: "Photos", sender: self)
+        performSegue(withIdentifier: "Photos", sender: view.annotation!.coordinate)
+        
+        map.deselectAnnotation(view.annotation, animated: false)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Photos" {
+            let destination = segue.destination as! PhotosViewController
+            let coordinate = sender as! CLLocationCoordinate2D
+            destination.location = coordinate
+            
+            let fetchedPins = try? dataController.viewContext.fetch(fetch)
+            
+            for pin in fetchedPins! {
+                
+                if pin.latitude == coordinate.latitude && pin.longitude == coordinate.longitude {
+                    
+                    destination.selectedPin = pin
+                    destination.dataController = dataController
+                    
+                    
+                    break
+                }
+            }
+            
+        }
     }
 
 }

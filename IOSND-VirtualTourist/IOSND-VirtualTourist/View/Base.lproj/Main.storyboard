@@ -60,11 +60,10 @@
             </objects>
             <point key="canvasLocation" x="-415.19999999999999" y="78.710644677661179"/>
         </scene>
-        <!--View Controller-->
+        <!--Photos View Controller-->
         <scene sceneID="5wm-1s-8lA">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="b9V-DI-bQU" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="fWV-tw-oYG" sceneMemberID="viewController">
+                <viewController id="fWV-tw-oYG" customClass="PhotosViewController" customModule="IOSND_VirtualTourist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZdO-c1-0lc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -79,7 +78,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="vkL-Gl-OOO">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCell" id="vkL-Gl-OOO" customClass="ImageCell" customModule="IOSND_VirtualTourist" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="118" height="115"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -89,20 +88,36 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aFl-8T-VHm">
                                                     <rect key="frame" x="0.0" y="0.0" width="118" height="115"/>
                                                 </imageView>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="cr0-ri-Z9s">
+                                                    <rect key="frame" x="49" y="47" width="20" height="20"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                         </view>
                                         <constraints>
+                                            <constraint firstItem="cr0-ri-Z9s" firstAttribute="centerX" secondItem="aFl-8T-VHm" secondAttribute="centerX" id="Axi-D8-Mxs"/>
                                             <constraint firstItem="aFl-8T-VHm" firstAttribute="height" secondItem="vkL-Gl-OOO" secondAttribute="height" id="Fua-iM-RnC"/>
                                             <constraint firstItem="aFl-8T-VHm" firstAttribute="top" secondItem="vkL-Gl-OOO" secondAttribute="top" id="PWv-OO-k2D"/>
                                             <constraint firstItem="aFl-8T-VHm" firstAttribute="width" secondItem="vkL-Gl-OOO" secondAttribute="width" id="SlK-81-ZE0"/>
                                             <constraint firstItem="aFl-8T-VHm" firstAttribute="leading" secondItem="vkL-Gl-OOO" secondAttribute="leading" id="yVL-4B-bzT"/>
+                                            <constraint firstItem="cr0-ri-Z9s" firstAttribute="centerY" secondItem="aFl-8T-VHm" secondAttribute="centerY" id="z0Q-6L-tx1"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="activityIndicator" destination="cr0-ri-Z9s" id="Dbf-c8-7WB"/>
+                                            <outlet property="imageView" destination="aFl-8T-VHm" id="YGd-D2-PmD"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="fWV-tw-oYG" id="BCR-uK-Usg"/>
+                                    <outlet property="delegate" destination="fWV-tw-oYG" id="2eZ-85-DRC"/>
+                                </connections>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Fn-4h-U6h">
                                 <rect key="frame" x="0.0" y="629" width="375" height="30"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="New Collection"/>
+                                <connections>
+                                    <action selector="newImagesButtonClicked:" destination="fWV-tw-oYG" eventType="touchUpInside" id="sex-aE-wLb"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -117,7 +132,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="482-3B-qWq"/>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="Gzt-hK-z18" id="DCB-1y-6rc"/>
+                        <outlet property="newImagesButton" destination="2Fn-4h-U6h" id="BRN-rP-rsn"/>
+                    </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b9V-DI-bQU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="364" y="78.710644677661179"/>
         </scene>
