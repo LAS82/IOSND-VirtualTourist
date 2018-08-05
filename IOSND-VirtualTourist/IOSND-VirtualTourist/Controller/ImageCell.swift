@@ -10,6 +10,7 @@ import UIKit
 
 class ImageCell: UICollectionViewCell {
     
+    //MARK: - Cell Properties
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     

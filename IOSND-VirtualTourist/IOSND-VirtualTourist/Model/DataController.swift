@@ -47,7 +47,7 @@ class DataController {
 
 
 extension DataController {
-    func autoSaveViewContext(interval:TimeInterval = 30) {
+    func autoSaveViewContext(interval:TimeInterval = 1) {
         
         guard interval > 0 else {
             return
