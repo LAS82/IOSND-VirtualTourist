@@ -12,13 +12,16 @@ import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate {
     
+    //MARK: - Properties
     var dataController: DataController!
     var mapPress = UILongPressGestureRecognizer()
     let fetch: NSFetchRequest<Pin> = Pin.fetchRequest()
-    let fetchRequest: NSFetchRequest<Pin> = Pin.fetchRequest()
     
     @IBOutlet weak var map: MKMapView!
     
+    //MARK: - View Functions
+    
+    //Loads the map
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,50 +31,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         loadPinsOnMap()
     }
-
-    @objc func setPinOnMap(sender: UILongPressGestureRecognizer) {
-        
-        let touchPoint = sender.location(in: map)
-        let touchCoordinate = map.convert(touchPoint, toCoordinateFrom: map)
-        
-        let pointAnnotation = MKPointAnnotation()
-        pointAnnotation.coordinate = touchCoordinate
-        map.addAnnotation(pointAnnotation)
-        
-        savePinData(annotation: pointAnnotation)
-        
-    }
     
-    func savePinData(annotation: MKPointAnnotation) {
-        
-        let newPin = Pin(context: self.dataController.viewContext)
-        newPin.latitude = annotation.coordinate.latitude as Double
-        newPin.longitude = annotation.coordinate.longitude as Double
-        
-        try? self.dataController.viewContext.save()
-        
-    }
+    //MARK: - MapView functions
     
-    func setPinOnMap(_ pin: Pin) {
-        
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(pin.latitude), longitude: CLLocationDegrees(pin.longitude))
-        
-        map.addAnnotation(annotation)
-        
-    }
-    
-    func loadPinsOnMap() {
-        if let pins = try? dataController.viewContext.fetch(fetch) {
-            
-            for pin in pins {
-                setPinOnMap(pin)
-            }
-            
-        }
-    }
-    
-    
+    //Configures pin
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         let identifier = "travelPin"
@@ -88,27 +51,33 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
     }
     
+    //Navigates to PhotosViewController
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        performSegue(withIdentifier: "Photos", sender: view.annotation!.coordinate)
         
+        performSegue(withIdentifier: "Photos", sender: view.annotation!.coordinate)
         map.deselectAnnotation(view.annotation, animated: false)
     }
     
+    //MARK: - Segue functions
+    
+    //Prepares data before go to PhotosViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == "Photos" {
-            let destination = segue.destination as! PhotosViewController
-            let coordinate = sender as! CLLocationCoordinate2D
-            destination.location = coordinate
             
-            let fetchedPins = try? dataController.viewContext.fetch(fetch)
+            let photosViewController = segue.destination as! PhotosViewController
+            let location = sender as! CLLocationCoordinate2D
             
-            for pin in fetchedPins! {
+            photosViewController.location = location
+            
+            let pins = try? dataController.viewContext.fetch(fetch)
+            
+            for pin in pins! {
                 
-                if pin.latitude == coordinate.latitude && pin.longitude == coordinate.longitude {
+                if pin.latitude == location.latitude && pin.longitude == location.longitude {
                     
-                    destination.selectedPin = pin
-                    destination.dataController = dataController
-                    
+                    photosViewController.selectedPin = pin
+                    photosViewController.dataController = dataController
                     
                     break
                 }
@@ -116,6 +85,53 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
         }
     }
+    
+    //MARK: - Pin functions
 
+    //Sets a new Pin on the map
+    @objc func setPinOnMap(sender: UILongPressGestureRecognizer) {
+        
+        let touchPoint = sender.location(in: map)
+        let touchCoordinate = map.convert(touchPoint, toCoordinateFrom: map)
+        
+        let pointAnnotation = MKPointAnnotation()
+        pointAnnotation.coordinate = touchCoordinate
+        map.addAnnotation(pointAnnotation)
+        
+        savePinData(annotation: pointAnnotation)
+        
+    }
+    
+    //Saves the pin data on database
+    func savePinData(annotation: MKPointAnnotation) {
+        
+        let newPin = Pin(context: self.dataController.viewContext)
+        newPin.latitude = annotation.coordinate.latitude as Double
+        newPin.longitude = annotation.coordinate.longitude as Double
+        
+        try? self.dataController.viewContext.save()
+        
+    }
+    
+    //Sets the pins on the map
+    func setPinOnMap(_ pin: Pin) {
+        
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(pin.latitude), longitude: CLLocationDegrees(pin.longitude))
+        
+        map.addAnnotation(annotation)
+        
+    }
+    
+    //Sets the pins on the map
+    func loadPinsOnMap() {
+        if let pins = try? dataController.viewContext.fetch(fetch) {
+            
+            for pin in pins {
+                setPinOnMap(pin)
+            }
+            
+        }
+    }
 }
 

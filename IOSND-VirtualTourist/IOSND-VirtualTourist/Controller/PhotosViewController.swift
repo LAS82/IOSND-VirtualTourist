@@ -29,7 +29,7 @@ class PhotosViewController : UIViewController, UICollectionViewDelegate, UIColle
     var deletedIndexPaths: [IndexPath]!
     var updatedIndexPaths: [IndexPath]!
     
-    //MARK: - View Functions
+    //MARK: - View functions
     
     //Recovers saved images
     override func viewDidLoad() {
@@ -64,7 +64,7 @@ class PhotosViewController : UIViewController, UICollectionViewDelegate, UIColle
     }
     
     
-    //MARK: - Collection view methods
+    //MARK: - Collection view functions
     
     //Gets the number of objects
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -144,7 +144,7 @@ class PhotosViewController : UIViewController, UICollectionViewDelegate, UIColle
     }
     
     
-    //MARK: - Event methods
+    //MARK: - Event functions
     
     //Get new photos
     @IBAction func newImagesButtonClicked(_ sender: Any) {
@@ -157,7 +157,7 @@ class PhotosViewController : UIViewController, UICollectionViewDelegate, UIColle
     }
     
     
-    //MARK: - Other methods
+    //MARK: - Other functions
     
     //Process the fetched results
     func getFetchedResults() {
