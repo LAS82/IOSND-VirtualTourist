@@ -23,6 +23,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     //Loads the map
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         mapPress = UILongPressGestureRecognizer(target: self, action: #selector(setPinOnMap(sender:)))
@@ -41,9 +42,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         var pin = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView
         
         if pin == nil {
+            
             pin = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             pin!.canShowCallout = false
         } else {
+            
             pin!.annotation = annotation
         }
         
@@ -128,6 +131,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         if let pins = try? dataController.viewContext.fetch(fetch) {
             
             for pin in pins {
+                
                 setPinOnMap(pin)
             }
             
